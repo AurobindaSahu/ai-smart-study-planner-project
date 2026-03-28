@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Smart Study Planner</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="header-content">
+      <h1>Smart Study Planner</h1>
+      <button id="logoutBtn" class="btn outline-btn">Logout</button>
+    </div>
+  </header>
+
+  <main class="dashboard-grid">
+    <section class="input-section">
+      <div class="card">
+        <h3>Add Subject to Study Plan</h3>
+        <form id="subjectForm">
+          <div class="input-group">
+            <label for="subjectName">Subject Name</label>
+            <input type="text" id="subjectName" required>
+          </div>
+          <div class="input-group row-group">
+            <div>
+              <label for="daysLeft">Days Left</label>
+              <input type="number" id="daysLeft" min="1" required>
+            </div>
+            <div>
+              <label for="difficulty">Difficulty (1-5)</label>
+              <input type="number" id="difficulty" min="1" max="5" required>
+            </div>
+          </div>
+          <button type="submit" class="btn primary-btn">Generate Plan</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="output-section">
+      <div class="card">
+        <h3>Priority Study Plan</h3>
+        <p class="subtitle">Time-blocked schedule powered by Machine Learning.</p>
+        <div id="studyPlanContainer" class="list-container">
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Time Allocation Overview</h3>
+        <div style="position: relative; height: 300px; width: 100%;">
+          <canvas id="studyChart"></canvas>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

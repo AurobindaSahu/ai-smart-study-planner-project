@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Study Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="auth-body">
+    <div class="card auth-card">
+        <h2>Welcome Back</h2>
+        <p>Login to organize your academic life</p>
+        <form id="loginForm">
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" class="btn primary-btn">Login</button>
+        </form>
+        <p id="message" class="message" style="color:red; margin-top:10px;"></p>
+        <div style="margin-top: 1.5rem; font-size: 0.9rem;">
+            <span>Don't have an account?</span> <a href="register.html" style="color: var(--primary);">Register here</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('password').value;
+            let users = JSON.parse(localStorage.getItem('studyPlannerUsers')) || [];
+
+            if (users.find(u => u.email === email && u.password === pass)) {
+                localStorage.setItem('studyPlannerAuth', 'true');
+                localStorage.setItem('studentEmail', email);
+                window.location.href = 'dashboard.html';
+            } else {
+                document.getElementById('message').textContent = "Invalid credentials.";
+            }
+        });
+    </script>
+</body>
+
+</html>

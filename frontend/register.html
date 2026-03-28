@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register - Study Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="auth-body">
+    <div class="card auth-card">
+        <h2>Create Account</h2>
+        <p>Start planning your future</p>
+        <form id="registerForm">
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" class="btn primary-btn">Register</button>
+        </form>
+        <p id="message" class="message" style="margin-top:10px;"></p>
+        <div style="margin-top: 1.5rem; font-size: 0.9rem;">
+            <span>Already have an account?</span> <a href="login.html" style="color: var(--primary);">Login here</a>
+        </div>
+    </div>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('password').value;
+            let users = JSON.parse(localStorage.getItem('studyPlannerUsers')) || [];
+
+            if (users.some(u => u.email === email)) {
+                document.getElementById('message').textContent = "Email already exists!";
+                document.getElementById('message').style.color = "red";
+            } else {
+                users.push({ email, password: pass });
+                localStorage.setItem('studyPlannerUsers', JSON.stringify(users));
+                document.getElementById('message').textContent = "Registration successful! Redirecting...";
+                document.getElementById('message').style.color = "var(--success)";
+                setTimeout(() => window.location.href = 'login.html', 1500);
+            }
+        });
+    </script>
+</body>
+
+</html>
